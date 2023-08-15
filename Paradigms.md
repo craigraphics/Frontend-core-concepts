@@ -152,3 +152,5 @@ Most modern programming languages, including JavaScript, Python, Java, and other
 #### Disadvantages
 - Readability: Complex regex patterns can become difficult to read and maintain.
 - Performance: Inefficient regex patterns might lead to performance issues in some scenarios.
+
+  Reference: https://jex.im/regulex/#!flags=&re=%5E(a%7Cb)*%3F%24
