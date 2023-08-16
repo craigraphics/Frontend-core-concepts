@@ -29,7 +29,7 @@ TypeScript code must be transcompiled into JavaScript, as browsers do not unders
 - **Compilation Step**: The need to compile TypeScript into JavaScript can be seen as an additional step in the development process.
 
 ***
-### Types
+## Types
 In TypeScript, types are a powerful way to describe the shape and behavior of an object within the code. They provide a way to specify what kind of values are permitted for a particular variable, parameter, or return value. Here's an overview of the primary types in TypeScript:
 
 1. **Primitive Types**:
@@ -74,7 +74,7 @@ In TypeScript, types are a powerful way to describe the shape and behavior of an
 
 
 ***
-### Generics
+## Generics
 
 Generics in TypeScript provide a way to create reusable components that can work over a variety of types rather than a single one. This allows you to write more maintainable and scalable code without losing type safety.
 
@@ -209,7 +209,7 @@ Union types in TypeScript provide a powerful way to model scenarios where a valu
 
 
 ***
-### Intersection Types
+## Intersection Types
 
 Intersection Types in TypeScript allow you to combine multiple types into one. This enables you to mix several structures together to create a new one, meaning that a variable with an intersection type must meet all the combined types. Intersection types are denoted by the `&` symbol.
 
@@ -288,7 +288,7 @@ While intersection types are powerful, they might lead to confusion if not used 
 
 
 ***
-### Utility Types
+## Utility Types
 
 Utility Types provide a set of type transformations that you can use to manipulate types in various ways. They are like functions but operate on types, allowing you to create new types based on existing ones. These transformations can make your code more expressive and maintainable. Here's a brief overview of some of the most common utility types:
 
@@ -358,7 +358,7 @@ type T3 = ReturnType<() => string>;  // string
 
 
 ***
-### Namespaces
+## Namespaces
 
 Namespaces in TypeScript are a way to organize code and encapsulate functionalities. They provide a container for grouping variables, functions, interfaces, classes, and even other namespaces, allowing you to avoid naming collisions and create a modular structure.
 
@@ -432,3 +432,237 @@ console.log(MyNamespace.FunctionB()); // Outputs: 'Function B'
 
 With the modern ES6 module system, the need for namespaces has been largely reduced, as modules themselves provide a way to organize and encapsulate code. However, namespaces are still useful in certain scenarios, especially in larger codebases or when you need to merge declarations.
 
+
+***
+## Interfaces
+In TypeScript, interfaces are a powerful way to define contracts within your code. They are used to define the shape of an object, ensuring that the object has certain properties with specific types.
+
+### Definition and Usage
+
+An interface in TypeScript is used to define a type that represents a contract for classes to implement or for objects to adhere to. It can include properties, methods, and index signatures.
+
+### Examples
+
+Here's an example of an interface that describes a basic structure for a `Person` object:
+
+```typescript
+interface Person {
+  firstName: string;
+  lastName: string;
+  age?: number; // Optional property
+  greet(): void; // Method signature
+}
+
+const john: Person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  greet() {
+    console.log(`Hello, my name is ${this.firstName} ${this.lastName}`);
+  },
+};
+```
+
+### Interfaces and Classes
+
+Interfaces can be used with classes to ensure that the class adheres to a particular contract. Any class that implements an interface must provide an implementation for all the properties and methods defined by that interface.
+
+```typescript
+interface Animal {
+  name: string;
+  makeSound(): void;
+}
+
+class Dog implements Animal {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  makeSound() {
+    console.log('Woof!');
+  }
+}
+```
+
+### Extending Interfaces
+
+Interfaces can extend one or more other interfaces, inheriting all their properties and methods.
+
+```typescript
+interface Shape {
+  area(): number;
+}
+
+interface Circle extends Shape {
+  radius: number;
+}
+
+const circle: Circle = {
+  radius: 5,
+  area() {
+    return Math.PI * this.radius ** 2;
+  },
+};
+```
+
+### Advantages of Interfaces
+
+1. **Code Consistency:** They help enforce consistent structures across your codebase, reducing errors.
+2. **Code Reusability:** You can define common structures or behaviors across multiple parts or classes of your application.
+3. **Enhanced Tooling:** Many code editors provide better support and autocompletion for code that uses interfaces.
+
+
+***
+## Enums
+Enums (short for enumerations) are a feature that allows you to define a set of named constants. They can make your code more readable and expressive by allowing you to use descriptive names for values.
+
+### Numeric Enums
+
+By default, enums are numeric, and they are zero-based. Here's an example:
+
+```typescript
+enum Direction {
+  North,
+  East,
+  South,
+  West,
+}
+
+let currentDirection: Direction = Direction.North;
+```
+
+In this example, `Direction.North` has a value of `0`, `Direction.East` has a value of `1`, and so on.
+
+You can also manually set the values:
+
+```typescript
+enum Direction {
+  North = 1,
+  East = 2,
+  South = 3,
+  West = 4,
+}
+```
+
+### String Enums
+
+TypeScript also allows you to define string enums, where the values are initialized with string literals:
+
+```typescript
+enum Direction {
+  North = 'NORTH',
+  East = 'EAST',
+  South = 'SOUTH',
+  West = 'WEST',
+}
+```
+
+### Const Enums
+
+If you want to ensure that the enum values are inlined during compilation, you can define a const enum:
+
+```typescript
+const enum Direction {
+  North,
+  East,
+  South,
+  West,
+}
+```
+
+Const enums are removed during compilation, and only the values are left in the resulting JavaScript.
+
+### Computed Enums
+
+You can also use computed values in an enum:
+
+```typescript
+enum FileAccess {
+  None,
+  Read = 1 << 1,
+  Write = 1 << 2,
+  ReadWrite = Read | Write,
+}
+```
+
+### Using Enums
+
+You can use enums just like any other type in TypeScript:
+
+```typescript
+function printDirection(direction: Direction) {
+  console.log(direction);
+}
+
+printDirection(Direction.North); // Outputs: 'NORTH' if using string enum or '0' if using numeric enum
+```
+
+***
+## Decorators
+Decorators are a stage 2 proposal for JavaScript and an experimental feature in TypeScript. They provide a way to add annotations and modify classes, properties, methods, or parameters using higher-order functions.
+
+Decorators allow developers to write cleaner code by separating concerns and adding functionalities to objects in a declarative way.
+
+### Types of Decorators
+
+1. **Class Decorators**: Applied to the constructor of the class.
+2. **Property Decorators**: Applied to the properties of classes.
+3. **Method Decorators**: Applied to the methods of classes.
+4. **Accessor Decorators**: Applied to the get and/or set accessors.
+5. **Parameter Decorators**: Applied to parameters of class constructors or methods.
+
+### How to Use Decorators
+
+Here's a basic example of a class decorator:
+
+```typescript
+function logClass(target: Function) {
+  console.log(`Class created: ${target}`);
+}
+
+@logClass
+class MyClass {
+  // ...
+}
+```
+
+This `@logClass` decorator will log the class when it's defined.
+
+### Example of a Method Decorator
+
+Here's how you might create a method decorator that logs whenever the method is called:
+
+```typescript
+function logMethod(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function (...args: any[]) {
+    console.log(`Method ${propertyKey} called with args: ${JSON.stringify(args)}`);
+    return originalMethod.apply(this, args);
+  };
+
+  return descriptor;
+}
+
+class MyClass {
+  @logMethod
+  myMethod(arg1: string, arg2: number) {
+    // ...
+  }
+}
+```
+
+This `@logMethod` decorator will log any calls to `myMethod` along with the arguments passed.
+
+### Enabling Decorators
+
+Since decorators are considered experimental, you'll need to enable them in your `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
