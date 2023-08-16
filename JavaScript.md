@@ -160,64 +160,76 @@ Closures are widely used in JavaScript, and they enable various programming tech
 
 ***
 ### This
-The keyword `this` refers to the object that a function is a method of, or the context in which the function is executed. It's a special identifier that automatically gets defined within the scope of a function and can have different values depending on how the function is called.
+In JavaScript, the keyword `this` refers to the object that a function is a method of, or the context in which the function is executed. It's a special identifier that automatically gets defined within the scope of a function and can have different values depending on how the function is called.
+
+Here's an overview of what `this` refers to in various scenarios:
 
 #### 1. Global Context
-In the global scope, outside any function, this refers to the global object. In browsers, that's the window object, and in Node.js, it's the global object.
+
+In the global scope, outside any function, `this` refers to the global object. In browsers, that's the `window` object, and in Node.js, it's the `global` object.
 
 #### 2. Function Invocation
-When a regular function is invoked, the value of this depends on the invocation:
 
-As a standalone function: this will be the global object, or undefined in strict mode.
-As an object's method: this will refer to the object itself.
-Using call, apply, or bind: this can be explicitly set to any object.
-As a constructor with the new keyword: this refers to the newly created object.
+When a regular function is invoked, the value of `this` depends on the invocation:
+
+- **As a standalone function**: `this` will be the global object, or `undefined` in strict mode.
+- **As an object's method**: `this` will refer to the object itself.
+- **Using `call`, `apply`, or `bind`**: `this` can be explicitly set to any object.
+- **As a constructor with the `new` keyword**: `this` refers to the newly created object.
 
 #### 3. Arrow Functions
-Arrow functions don't have their own this. They inherit this from the surrounding lexical context. This makes them useful when you want to access the this value of an enclosing function.
+
+Arrow functions don't have their own `this`. They inherit `this` from the surrounding lexical context. This makes them useful when you want to access the `this` value of an enclosing function.
 
 #### 4. Event Handlers
-In event handlers, this often refers to the DOM element that the event is attached to.
+
+In event handlers, `this` often refers to the DOM element that the event is attached to.
 
 #### 5. Classes
-Inside JavaScript classes, this refers to the instance of the class.
 
-#### Regular Function Call:
-```Javascript
-function example() {
-  console.log(this);
-}
-example(); // window in browsers, or global in Node.js
-```
+Inside JavaScript classes, `this` refers to the instance of the class.
 
-#### Method Call:
-```Javascript
-const obj = {
-  value: 42,
-showValue: function() {
-  console.log(this.value);
+#### Examples
+
+- **Regular Function Call**:
+  ```javascript
+  function example() {
+    console.log(this);
   }
-};
-obj.showValue(); // 42
+  example(); // window in browsers, or global in Node.js
+  ```
+
+- **Method Call**:
+  ```javascript
+  var obj = { value: 42, showValue: function() { console.log(this.value); } };
+  obj.showValue(); // 42
+  ```
+
+- **Arrow Function**:
+  ```javascript
+  var obj = { value: 42, showValue: () => { console.log(this.value); } };
+  obj.showValue(); // undefined, because `this` is taken from the global context
+  ```
+
+Understanding how `this` behaves in different contexts is key to working effectively with JavaScript, especially when dealing with object-oriented programming, callbacks, and event handling. The behavior of `this` can be subtle and sometimes confusing, but with practice, it becomes an essential tool in a developer's toolkit.
+
+### `Call`, `Apply` & `Bind`
+In JavaScript, `call`, `bind`, and `apply` are methods that can be used to control the value of `this` within a function and to invoke a function with specific arguments. They are part of the `Function.prototype`, meaning they can be called on any function object. Let's break down how each of them works:
+
+#### 1. `call`
+
+The `call` method allows you to invoke a function with a specific value of `this` and individual arguments. The syntax is:
+
+```javascript
+function.call(thisArg, arg1, arg2, ...);
 ```
 
-#### Arrow Function:
-```Javascript
-const obj = {
-  value: 42,
-  showValue: () => {
-    console.log(this.value);
-  }
-};
-obj.showValue(); // undefined, because `this` is taken from the global context
-```
+- `thisArg`: The value to be passed as `this` to the function.
+- `arg1, arg2, ...`: Arguments to be passed to the function.
 
-#### Call / Bind / Apply 
-`call, bind, and apply` are methods that can be used to control the value of this within a function and to invoke a function with specific arguments. They are part of the Function.prototype, meaning they can be called on any function object. Let's break down how each of them works:
+Example:
 
-#### 1. call
-The call method allows you to invoke a function with a specific value of this and individual arguments. The syntax is:
-```Javascript
+```javascript
 function greet(greeting, punctuation) {
   console.log(greeting + ', ' + this.name + punctuation);
 }
@@ -226,18 +238,48 @@ var person = { name: 'William' };
 greet.call(person, 'Hello', '!'); // Outputs "Hello, William!"
 ```
 
-#### 2. apply
-The apply method is similar to call, but it takes an array of arguments instead of individual arguments. 
-```Javascript
+#### 2. `apply`
+
+The `apply` method is similar to `call`, but it takes an array of arguments instead of individual arguments. The syntax is:
+
+```javascript
+function.apply(thisArg, [argsArray]);
+```
+
+- `thisArg`: The value to be passed as `this` to the function.
+- `argsArray`: An array of arguments to be passed to the function.
+
+Example:
+
+```javascript
 greet.apply(person, ['Hello', '!']); // Outputs "Hello, William!"
 ```
 
-#### 3. bind
-The bind method returns a new function, permanently setting the value of this for that new function, along with any arguments that are provided. 
-```Javascript
+#### 3. `bind`
+
+The `bind` method returns a new function, permanently setting the value of `this` for that new function, along with any arguments that are provided. The syntax is:
+
+```javascript
+var boundFunction = function.bind(thisArg, arg1, arg2, ...);
+```
+
+- `thisArg`: The value to be passed as `this` to the function.
+- `arg1, arg2, ...`: Arguments to be pre-filled in the function.
+
+Example:
+
+```javascript
 var boundGreet = greet.bind(person, 'Hello');
 boundGreet('!'); // Outputs "Hello, William!"
 ```
+
+### Summary
+
+- **`call`**: Invokes a function with a specified `this` value and individual arguments.
+- **`apply`**: Invokes a function with a specified `this` value and an array of arguments.
+- **`bind`**: Returns a new function with a permanently set `this` value and optional pre-filled arguments.
+
+These methods are powerful tools in JavaScript, enabling more flexible and controlled function invocation, particularly when working with callbacks, event handlers, or object-oriented patterns. They allow developers to manipulate the context in which functions are called, leading to cleaner and more reusable code.
 
 ***
 ### Coercion
