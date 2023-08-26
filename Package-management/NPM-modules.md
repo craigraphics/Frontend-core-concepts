@@ -35,5 +35,3 @@ However, it's important to note that global modules are generally not `require`-
 2. **Accessibility**: Local modules need to be `required` in the project's code, while global modules are usually command-line utilities and not meant to be `required` in a project.
 3. **Versioning**: Local modules allow for different projects to use different versions of the same module, thereby avoiding potential conflicts. Global modules do not offer this flexibility.
 4. **Storage**: Local modules are stored in a project's `node_modules` directory, whereas global modules are stored in a global directory that depends on your operating system and Node.js setup.
-
-I hope this clarifies your understanding of NPM modules and the differences between local and global installations. Would you like to know more about any specific aspect?
