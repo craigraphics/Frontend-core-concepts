@@ -16,6 +16,11 @@ System requirements means to figure out and narrow down what exactly needs to be
    - Scability, Availability, Reliablity, Security, Performance.
    - Quality attributes do dictate the software architecture of our system.
 ### 4. system constrains - limitations and boundaries
-  - Time constraints
-  - Financial constraints
-  - Staffing constraints
+  - Time constraints.
+  - Financial constraints.
+  - Staffing constraints.
+
+## Steps for capturing the features and functional requirements
+   - Identifying all the users and the actors.
+   - Gathering all the use cases.
+   - Expanding each use case with a flow of interactions between the actors in our system.
