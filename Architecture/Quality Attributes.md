@@ -1,6 +1,6 @@
 ## List of Quality attributes:
 - Performance
-- Scability
+- Scalability
 - Availability
 - Testability
 - Deployability
