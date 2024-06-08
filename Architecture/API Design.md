@@ -1,13 +1,13 @@
-## What is an API?
+# What is an API?
 After capturing all functional requirements, we can think of our system as a black box.
-The black box has:  
+- The black box has: 
   - Behavior
-  - Well-defined interface
-That interface is a contract between:
+  - Well-defined interface.
+- That interface is a contract between:
   - Engineers who implement the system
   - Client applications who use the system
-Since the interface is called by other applications, it is referred to as an Application Programming Interface or API.
-In a large-scale system, API is called by other application remotely through the network.
+- Since the interface is called by other applications, it is referred to as an Application Programming Interface or API.
+- In a large-scale system, API is called by other application remotely through the network.
 
 #### Applications that may call the API:
 - Frontend clients
@@ -48,3 +48,16 @@ In a large-scale system, API is called by other application remotely through the
   - Versioning the API.
     - In practice there may be a need to make non-backward compatible API changes.
     - When explicitly version the APIs, we can maintain two version at the same time and deprecate one gradually.     
+ 
+## RPC API
+Remote Procedure Call
+### Unique Features 
+- The remote method invocation looks like calling a normal local method in terms of the developer code.
+- This is referred to as location transparency.
+- To the developer of the client application a method executed locally or remotely looks the same.
+- RPC frameworks support multiple programming languages.
+- Application written in different programming languages can to to each other using RPC.
+### Benefits
+- Convenience to the developers of the client applications
+- They can communicate with our system easily by calling methods on objects similar to calling normal, local methods.
+- The details of communication establisment or data transfer between clien to server abstracted away from the developers.  
