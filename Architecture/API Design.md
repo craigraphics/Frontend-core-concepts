@@ -49,15 +49,66 @@ After capturing all functional requirements, we can think of our system as a bla
     - In practice there may be a need to make non-backward compatible API changes.
     - When explicitly version the APIs, we can maintain two version at the same time and deprecate one gradually.     
  
-## RPC API
-Remote Procedure Call
+## RPC API (Remote Procedure Call)
+
+RPC revolves more around actions and less around data/resources. Every action is a new method with a different name.
+
 ### Unique Features 
 - The remote method invocation looks like calling a normal local method in terms of the developer code.
 - This is referred to as location transparency.
 - To the developer of the client application a method executed locally or remotely looks the same.
 - RPC frameworks support multiple programming languages.
-- Application written in different programming languages can to to each other using RPC.
+- Application written in different programming languages can talk to each other using RPC.
 ### Benefits
 - Convenience to the developers of the client applications
 - They can communicate with our system easily by calling methods on objects similar to calling normal, local methods.
-- The details of communication establisment or data transfer between clien to server abstracted away from the developers.  
+- The details of communication establishment or data transfer between client to server abstracted away from the developers.
+- Failures in communication with server result in an error or exception depending on the programming language.
+### Drawbacks
+  - Slowness - the client never know how long those remote methods invocations can take. Slowness can be addressed by introducing asynchronous version for slow methods.
+  - Unreliability - the client is remotely running on a computer and is using the network to communicate with our system.
+### When to use RPC
+  -  RPC are used in communication between backend systems.
+  -  Frameworks that support RPC from frontend clients are less common.
+  -  Perfect choice for API provided to a different company instead of an end user web/app page.
+### When no to use RPC
+- Where we don't want to abstract the network communication away.
+- When we want to take direct advantage of HTTP cookies or headers.
+
+## REST API (Representational State Transfer)
+A set of architectural constraints and best practices for defining APIs for the web.
+
+ ### Quality Attributes
+  - The server is stateless.
+    - It does NOT maintain any session information about client.
+    - Each message should be served in isolation without any information about previous requests.
+  - Cacheability - The server has to either explicitly/implicitly define each response as either cacheable or non-cacheable.
+### Named resources
+  - Each resource is named and addressed using a URI (Uniform Resource Identifier).
+  - The resources are organized in a hierarchy where each resource is a simple resource or collection resource. The hierarchy is represented using "/".
+    - A simple resource has a state and can contain one/more sub-resources.
+    - A collection resource contains a list of resources of the same type.
+### Best practices
+- Naming our resources using nouns.
+- Making distinction between collection resources and simple resources by using plurals.
+- Giving the resources clear and meaningful names.
+- The resource identifiers should be unique and URL friendly.
+
+### REST Operations
+- The API limits the number of methods we can perform. These operations are:
+  - Creating a new resource. -> POST
+  - Updating a existing resource. -> PUT
+  - Deleting a existing resource. -> DELETE
+  - Getting the current state of the resource or list of resources if collection. -> GET
+    
+### Methods Guarantees
+- The GET method is considered safe, applying to a resource will not change its state.
+- GET, PUT DELETE methods are idempotent - applying them multiple times would not result in the same state change as applying them once.
+- GET requests are considered cacheable by default.
+- Responses to POST requests can be made cacheable.
+
+REST API Definition - Step by step process
+1. Identifying Entities.
+2. Mapping Entities to URIs.
+3. Defining Resources' Representations, usually using JSON format.
+4. Assigning HTTP Methods to Operations on Resources.
