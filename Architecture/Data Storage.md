@@ -40,3 +40,41 @@
 ### When Not to choose a relational database
 - There isn't any inherent relationship between different records that justifies storing our data in tables.
 - Read performance is the most important quality that we need for providing a good user experience.
+
+## Non-relational Databases
+- A relatively new concept that became popular in the mid-2000s.
+- Solved drawbacks of relational databases.
+- Don't store data in tables.
+- Support more native data structures to programming languages.
+- This eliminates the need for an ORM (Object Relational Mapping).
+- Non-Relational Databases are designed for faster queries in contrast with Relational Databases that are designed for efficient storage.
+
+### Trade-offs
+- When we allow flexible schemas, we lose the ability to easily analyze those records.
+- Analyzing multiple groups of records (join operations) also becomes hard.
+- ACID transactions are rarely supported by non-relational databases.
+
+### Categories
+- Key/Value store - can be seen as a large-scale hashtable or dictionary.
+    - It has very few constraints on the type of values we have for each key.
+- Document Store
+    - We can store collections of documents with more structure inside each document.
+    - Each document is an object with different attributes.
+    - Those attributes can be of different types.
+    - Documents inside a document store are easily mapped to objects inside a programming language.
+-  Graph Database
+    - Extension of a document store with additional capabilities to link, traverse analyze multiple records more efficiently.
+    - Optimized for navigating and analyzing relationships between different records.
+    - Fraud detection
+### When to choose a non-relational database
+- Analyze our use case.
+- Figure out which properties of a database are the most important to us.
+- Are superior when it comes to query speed.
+- Perfect choice for caching.
+- Handling real-time big data.
+- Data is not structured.
+- Different records can contain different records.
+### Examples
+- User profiles
+- Content management
+
