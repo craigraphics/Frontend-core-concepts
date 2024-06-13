@@ -78,3 +78,15 @@
 - User profiles
 - Content management
 
+### Solutions
+#### Key/Value Stores Examples
+- Redis
+- Aerospike
+- Amazon DynamoDB
+#### Document Store Examples
+- Cassandra
+- MongoDB
+#### Graph Databases Examples
+- Amazon Neptune
+- NEO4J
+
