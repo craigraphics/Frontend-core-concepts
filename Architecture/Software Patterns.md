@@ -1,8 +1,8 @@
-## What are Software Architectural Patterns
+### What are Software Architectural Patterns
 - Are general repeatable solutions to commonly occurring system design problems.
 - Common solutions to software architectural problems that involve multiple components that run as separate runtime units.
 
-## Incentives for using Software Architectural Patterns
+### Incentives for using Software Architectural Patterns
 - Save valuable time and resources.
 - Avoid making our architecture resemble a Big Ball of Mud.
 - Other engineers and architects can follow it.
@@ -39,4 +39,20 @@
     - Egs. early-startup companies and well-established companies.
 
 ## Microservices Architecture
-- 
+- Microservices Architecture organizes our business logic aas a collection of loosely coupled and independently deployed services.
+- Each service is owned by a small team and has a narrow scope of responsibility.
+- Smaller codebase.
+    - Development becomes easier and faster.
+    - Codebase loads instantaneously in our IDE.
+    - Building and testing becomes easier.
+    - Troubleshooting or adding new features becomes easier.
+- Better performance and horizonall scalability.
+    - Instances become less CPU intensive and less memory-consuming.
+- Better Organizational Scalability
+- Better security (fault isolation)
+### Considerations 
+- We don't get all these benefits out-of-the-box.
+- Overhead and challenges.
+- We need to make sure that the services are logically separated such that every change:
+    - Can happen only in one service.
+    - Would not involve multiple teams. 
