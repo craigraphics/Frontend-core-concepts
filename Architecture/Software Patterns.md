@@ -55,4 +55,6 @@
 - Overhead and challenges.
 - We need to make sure that the services are logically separated such that every change:
     - Can happen only in one service.
-    - Would not involve multiple teams. 
+    - Would not involve multiple teams.
+- Separate database per microservice.
+- We should always start with a monolitich architecture.
