@@ -39,14 +39,14 @@
     - Egs. early-startup companies and well-established companies.
 
 ## Microservices Architecture
-- Microservices Architecture organizes our business logic aas a collection of loosely coupled and independently deployed services.
+- Microservices Architecture organizes our business logic as a collection of loosely coupled and independently deployed services.
 - Each service is owned by a small team and has a narrow scope of responsibility.
 - Smaller codebase.
     - Development becomes easier and faster.
     - Codebase loads instantaneously in our IDE.
     - Building and testing becomes easier.
     - Troubleshooting or adding new features becomes easier.
-- Better performance and horizonall scalability.
+- Better performance and horizontal scalability.
     - Instances become less CPU intensive and less memory-consuming.
 - Better Organizational Scalability
 - Better security (fault isolation)
@@ -57,4 +57,17 @@
     - Can happen only in one service.
     - Would not involve multiple teams.
 - Separate database per microservice.
-- We should always start with a monolitich architecture.
+- We should always start with a monolithic architecture.
+
+## Event-Driven Architecture
+- Instead of direct messages that issue commands or requests that ask for data we have only events.
+#### An event is an immutable statement of a fact or a change.
+- In an event-driven architecture we have 3 components, on the serving side we have the event emitter/producer on the receiving end we have the consumers and in between we have the event channel which is the message broker.
+-  event emitter ---- message broker ---- consumers
+### Benefits
+- Decoupling microservices - higher horizontal and organizational scalability
+- Analyze and respond to large streams of data in real time.
+### Architectural Patterns
+- Event sourcing - allowed us to store and audit the current state of a business entity by only appending inmutable events only when we need to.
+- CQRS pattern (Command Query Responsibility Segregation) - allows us to optimize a database with a high load of Read and Update operations by completely splitting operations to different services. It can help us to join data from completely different services and databases.
+
